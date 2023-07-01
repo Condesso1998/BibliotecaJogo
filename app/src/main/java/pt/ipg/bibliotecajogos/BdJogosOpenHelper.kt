@@ -17,7 +17,9 @@ class BdJogosOpenHelper(
      * @param db The database.
      */
     override fun onCreate(db: SQLiteDatabase?) {
-
+        requireNotNull(db)
+        TabelaCategorias(db).cria()
+        TabelaJogos(db).cria()
     }
 
     /**
@@ -43,6 +45,5 @@ class BdJogosOpenHelper(
      * @param newVersion The new database version.
      */
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
     }
 }

@@ -1,4 +1,4 @@
-package pt.ipg.livros
+package pt.ipg.bibliotecajogos
 
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
@@ -34,4 +34,13 @@ class BdInstrumentedTest {
         assert(bd.isOpen)
     }
 
+    @Test
+    fun consegueInserirCategorias() {
+        val openHelper = BdJogosOpenHelper(getAppContext())
+        val bd = openHelper.writableDatabase
+
+        val categoria = Categoria("Ação")
+        val id = TabelaCategorias(bd).insere(categoria.toContentValues())
+        assertNotEquals(-1, id)
+    }
 }

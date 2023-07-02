@@ -3,6 +3,7 @@ package pt.ipg.bibliotecajogos
 import android.database.Cursor
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
@@ -15,7 +16,16 @@ class AdapterJogos(val fragment: ListaJogosFragment) : RecyclerView.Adapter<Adap
         }
 
     inner class ViewHolderJogo(contentor: View) : ViewHolder(contentor) {
+        private val textViewTitulo = contentor.findViewById<TextView>(R.id.textViewTitulo)
+        private val textViewCategoria = contentor.findViewById<TextView>(R.id.textViewCategoria)
+
+
         internal var jogo: Jogo? = null
+            set(value) {
+                field = value
+                textViewTitulo.text = jogo?.titulo ?: ""
+                textViewCategoria.text = jogo?.idCategoria.toString() ?: ""
+            }
     }
 
     /**

@@ -26,7 +26,7 @@ class BdInstrumentedTest {
 
     @Before
     fun apagaBaseDados() {
-        getAppContext().deleteDatabase(BdJogosOpenHelper.NOME_BASE_DADOS)
+        //getAppContext().deleteDatabase(BdJogosOpenHelper.NOME_BASE_DADOS)
     }
 
 

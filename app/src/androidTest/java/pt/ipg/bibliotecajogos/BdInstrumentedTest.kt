@@ -66,13 +66,13 @@ class BdInstrumentedTest {
         insereCategoria(bd, categoria)
 
         val jogo1 = Jogo("Dark Souls III", categoria.id)
-        insereLivro(bd, jogo1)
+        insereJogo(bd, jogo1)
 
         val jogo2 = Jogo("Metal Gear V", categoria.id)
-        insereLivro(bd, jogo2)
+        insereJogo(bd, jogo2)
     }
 
-    private fun insereLivro(bd: SQLiteDatabase, jogo: Jogo) {
+    private fun insereJogo(bd: SQLiteDatabase, jogo: Jogo) {
         jogo.id = TabelaJogos(bd).insere(jogo.toContentValues())
         assertNotEquals(-1, jogo.id)
     }

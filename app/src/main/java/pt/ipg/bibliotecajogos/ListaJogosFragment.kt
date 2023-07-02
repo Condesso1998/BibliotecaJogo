@@ -11,6 +11,8 @@ import androidx.loader.content.Loader
 import androidx.recyclerview.widget.LinearLayoutManager
 import pt.ipg.bibliotecajogos.databinding.FragmentListaJogosBinding
 
+private const val ID_LOADER_JOGOS = 0
+
 /**
  * A simple [Fragment] subclass.
  * Use the [ListaLivrosFragment.newInstance] factory method to
@@ -31,8 +33,13 @@ class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lista_jogos, container, false)
+        _binding = FragmentListaJogosBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,6 +48,9 @@ class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         val adapterJogos = AdapterJogos()
         binding.recyclerViewJogos.adapter = adapterJogos
         binding.recyclerViewJogos.layoutManager = LinearLayoutManager(requireContext())
+
+        val loader = LoaderManager.getInstance(this)
+        loader.initLoader(ID_LOADER_JOGOS, null, this)
     }
 
     companion object {

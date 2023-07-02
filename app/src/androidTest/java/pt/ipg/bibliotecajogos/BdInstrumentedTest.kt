@@ -8,6 +8,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.junit.Assert.*
+import org.junit.Before
 import pt.ipg.bibliotecajogos.BdJogosOpenHelper
 
 /**
@@ -20,6 +21,11 @@ class BdInstrumentedTest {
 
     private fun getAppContext(): Context =
         InstrumentationRegistry.getInstrumentation().targetContext
+
+    @Before
+    fun apagaBaseDados() {
+        getAppContext().deleteDatabase(BdJogosOpenHelper.NOME_BASE_DADOS)
+    }
 
     @Test
     fun consegueAbrirBaseDados() {

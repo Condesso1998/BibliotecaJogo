@@ -30,5 +30,6 @@ Rui Condesso
     <string name="erro_guardar_jogo">Não foi possível guardar o livro</string>
     <string name="eliminar_livro_label">Eliminar livro</string>
     <string name="hello_blank_fragment">Hello</string>
-
+    <string name="jogo_eliminado_com_sucesso">Livro eliminado com sucesso</string>
+    <string name="erro_eliminar_jogo">Erro ao eliminar livro</string>
 </resources>

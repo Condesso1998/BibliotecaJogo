@@ -113,7 +113,8 @@ class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun eliminarLivro() {
-
+        val acao = ListaJogosFragmentDirections.actionListaJogosFragmentToEliminarJogoFragment(jogoSelecionado!!)
+        findNavController().navigate(acao)
     }
 
     private fun editarLivro() {

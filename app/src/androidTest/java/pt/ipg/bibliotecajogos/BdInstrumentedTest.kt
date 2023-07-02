@@ -11,6 +11,7 @@ import org.junit.runner.RunWith
 
 import org.junit.Assert.*
 import org.junit.Before
+import java.util.Calendar
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -66,10 +67,10 @@ class BdInstrumentedTest {
         val categoria = Categoria("RPG")
         insereCategoria(bd, categoria)
 
-        val jogo1 = Jogo("Dark Souls III", categoria.id)
+        val jogo1 = Jogo("Dark Souls III", null,categoria.id)
         insereJogo(bd, jogo1)
 
-        val jogo2 = Jogo("Metal Gear V", categoria.id)
+        val jogo2 = Jogo("Metal Gear V", null,categoria.id)
         insereJogo(bd, jogo2)
     }
 
@@ -112,6 +113,48 @@ class BdInstrumentedTest {
         )
 
         assert(cursorTodasCategorias.count > 1)
+    }
+
+    @Test
+    fun consegueLerJogos() {
+        val bd = getWritableDatabase()
+
+        val dataPub = Calendar.getInstance()
+        dataPub.set(2016, 4, 1)
+
+        val categoria = Categoria("Ação")
+        insereCategoria(bd, categoria)
+
+        val jogo1 = Jogo("Call of Duty I", dataPub, categoria.id)
+        insereJogo(bd, jogo1)
+
+        val jogo2 = Jogo("CS:GO", dataPub, categoria.id)
+        insereJogo(bd, jogo2)
+
+        val tabelaLivros = TabelaJogos(bd)
+
+        val cursor = tabelaLivros.consulta(
+            TabelaJogos.CAMPOS,
+            "${BaseColumns._ID}=?",
+            arrayOf(jogo1.id.toString()),
+            null,
+            null,
+            null
+        )
+
+        assert(cursor.moveToNext())
+
+        val livroBD = Jogo.fromCursor(cursor)
+
+        assertEquals(jogo1, livroBD)
+
+        val cursorTodosLivros = tabelaLivros.consulta(
+            TabelaJogos.CAMPOS,
+            null, null, null, null,
+            TabelaJogos.CAMPO_TITULO
+        )
+
+        assert(cursorTodosLivros.count > 1)
     }
 
 }

@@ -8,7 +8,7 @@ class TabelaJogos(db: SQLiteDatabase) : TabelaBD(db, NOME_TABELA) {
         db.execSQL("CREATE TABLE " + NOME_TABELA + " (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "titulo TEXT NOT NULL, " +
-                "$CAMPO_DATA_PUB INTEGER"+
+                CAMPO_DATA_PUB + " INTEGER, " + // Add a comma here
                 "id_categoria INTEGER NOT NULL, " +
                 "FOREIGN KEY (id_categoria) REFERENCES " + TabelaCategorias.NOME_TABELA +
                 "(" + BaseColumns._ID + ") ON DELETE RESTRICT)");

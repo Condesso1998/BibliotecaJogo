@@ -11,7 +11,7 @@ import pt.ipg.bibliotecajogos.databinding.FragmentFirstBinding
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class MenuPrincipalFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
 

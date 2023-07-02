@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.net.Uri
 
 class JogosContentProvider : ContentProvider() {
+    private var bdOpenHelper : BdJogosOpenHelper? = null
     /**
      * Implement this to initialize your content provider on startup.
      * This method is called for all registered content providers on the
@@ -34,7 +35,8 @@ class JogosContentProvider : ContentProvider() {
      * @return true if the provider was successfully loaded, false otherwise
      */
     override fun onCreate(): Boolean {
-        TODO("Not yet implemented")
+        bdOpenHelper = BdJogosOpenHelper(context)
+        return true
     }
 
     /**

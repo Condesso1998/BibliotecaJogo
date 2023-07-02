@@ -33,7 +33,11 @@ class MenuPrincipalFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSobre.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_MenuPrincipalFragment_to_SobreFragment)
+        }
+
+        binding.buttonJogos.setOnClickListener {
+            findNavController().navigate(R.id.action_MenuPrincipalFragment_to_ListaJogosFragment)
         }
     }
 

@@ -233,7 +233,6 @@ class JogosContentProvider : ContentProvider() {
      * this is an update request for a specific record.
      * @param values A set of column_name/value pairs to update in the database.
      * @param selection An optional filter to match rows to update.
-     * @return the number of rows affected.
      */
     override fun update(
         uri: Uri,
@@ -241,7 +240,17 @@ class JogosContentProvider : ContentProvider() {
         selection: String?,
         selectionArgs: Array<out String>?
     ): Int {
-        TODO("Not yet implemented")
+        val bd = bdOpenHelper!!.writableDatabase
+
+        val endereco = uriMatcher().match(uri)
+        val tabela = when (endereco) {
+            URI_CATEGORIA_ID -> TabelaCategorias(bd)
+            URI_JOGO_ID -> TabelaJogos(bd)
+            else -> return 0
+        }
+
+        val id = uri.lastPathSegment!!
+        return tabela.altera(values!!, "${BaseColumns._ID}=?", arrayOf(id))
     }
 
     companion object {

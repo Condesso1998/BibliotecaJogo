@@ -160,7 +160,15 @@ class JogosContentProvider : ContentProvider() {
      * @return a MIME type string, or `null` if there is no type.
      */
     override fun getType(uri: Uri): String? {
-        TODO("Not yet implemented")
+        val endereco = uriMatcher().match(uri)
+
+        return when(endereco) {
+            URI_CATEGORIAS -> "vnd.android.cursor.dir/$CATEGORIAS"
+            URI_CATEGORIA_ID -> "vnd.android.cursor.item/$CATEGORIAS"
+            URI_JOGOS -> "vnd.android.cursor.dir/$JOGOS"
+            URI_JOGO_ID -> "vnd.android.cursor.item/$JOGOS"
+            else -> null
+        }
     }
 
     /**

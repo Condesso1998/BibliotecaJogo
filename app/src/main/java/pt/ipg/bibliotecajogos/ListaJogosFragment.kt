@@ -1,31 +1,45 @@
 package pt.ipg.bibliotecajogos
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import pt.ipg.bibliotecajogos.databinding.FragmentListaJogosBinding
 
+/**
+ * A simple [Fragment] subclass.
+ * Use the [ListaLivrosFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
 class ListaJogosFragment : Fragment() {
+    private var _binding: FragmentListaJogosBinding? = null
 
-    companion object {
-        fun newInstance() = ListaJogosFragment()
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
-
-    private lateinit var viewModel: ListaJogosViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_lista_jogos, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ListaJogosViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val adapterJogos = AdapterJogos()
+        binding.recyclerViewJogos.adapter = adapterJogos
+        binding.recyclerViewJogos.layoutManager = LinearLayoutManager(requireContext())
     }
 
+    companion object {
+    }
 }

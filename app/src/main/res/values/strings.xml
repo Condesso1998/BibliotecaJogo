@@ -22,4 +22,6 @@ Rui Condesso
     <string name="titulo">Título</string>
     <string name="categoria">Categoria</string>
     <string name="data_publicacao">Data publicação</string>
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
 </resources>

@@ -1,10 +1,13 @@
 package pt.ipg.bibliotecajogos
 
+import android.database.Cursor
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.Loader
 import androidx.recyclerview.widget.LinearLayoutManager
 import pt.ipg.bibliotecajogos.databinding.FragmentListaJogosBinding
 
@@ -13,7 +16,7 @@ import pt.ipg.bibliotecajogos.databinding.FragmentListaJogosBinding
  * Use the [ListaLivrosFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ListaJogosFragment : Fragment() {
+class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     private var _binding: FragmentListaJogosBinding? = null
 
     // This property is only valid between onCreateView and
@@ -41,5 +44,17 @@ class ListaJogosFragment : Fragment() {
     }
 
     companion object {
+    }
+
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
+        TODO("Not yet implemented")
+    }
+
+    override fun onLoaderReset(loader: Loader<Cursor>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
+        TODO("Not yet implemented")
     }
 }

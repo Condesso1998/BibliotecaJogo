@@ -24,7 +24,7 @@ class AdapterJogos(val fragment: ListaJogosFragment) : RecyclerView.Adapter<Adap
             set(value) {
                 field = value
                 textViewTitulo.text = jogo?.titulo ?: ""
-                textViewCategoria.text = jogo?.idCategoria.toString() ?: ""
+                textViewCategoria.text = jogo?.categoria?.descricao ?: ""
             }
     }
 
@@ -88,7 +88,7 @@ class AdapterJogos(val fragment: ListaJogosFragment) : RecyclerView.Adapter<Adap
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ViewHolderJogo, position: Int) {
-        cursor!!.move(position)
+        cursor!!.moveToPosition(position)
         holder.jogo = Jogo.fromCursor(cursor!!)
     }
 }

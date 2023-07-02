@@ -67,10 +67,10 @@ class BdInstrumentedTest {
         val categoria = Categoria("RPG")
         insereCategoria(bd, categoria)
 
-        val jogo1 = Jogo("Dark Souls III", null,categoria.id)
+        val jogo1 = Jogo("Dark Souls III", null,categoria)
         insereJogo(bd, jogo1)
 
-        val jogo2 = Jogo("Metal Gear V", null,categoria.id)
+        val jogo2 = Jogo("Metal Gear V", null,categoria)
         insereJogo(bd, jogo2)
     }
 
@@ -119,24 +119,24 @@ class BdInstrumentedTest {
     fun consegueLerJogos() {
         val bd = getWritableDatabase()
 
+        val categoria = Categoria("Contos")
+        insereCategoria(bd, categoria)
+
+        val livro1 = Jogo("Todos os Contos", null, categoria)
+        insereJogo(bd, livro1)
+
         val dataPub = Calendar.getInstance()
         dataPub.set(2016, 4, 1)
 
-        val categoria = Categoria("Ação")
-        insereCategoria(bd, categoria)
+        val livro2 = Jogo("Contos de Grimm", dataPub, categoria)
+        insereJogo(bd, livro2)
 
-        val jogo1 = Jogo("Call of Duty I", dataPub, categoria.id)
-        insereJogo(bd, jogo1)
+        val tabelaJogos = TabelaJogos(bd)
 
-        val jogo2 = Jogo("CS:GO", dataPub, categoria.id)
-        insereJogo(bd, jogo2)
-
-        val tabelaLivros = TabelaJogos(bd)
-
-        val cursor = tabelaLivros.consulta(
+        val cursor = tabelaJogos.consulta(
             TabelaJogos.CAMPOS,
-            "${BaseColumns._ID}=?",
-            arrayOf(jogo1.id.toString()),
+            "${TabelaJogos.CAMPO_ID}=?",
+            arrayOf(livro1.id.toString()),
             null,
             null,
             null
@@ -144,11 +144,11 @@ class BdInstrumentedTest {
 
         assert(cursor.moveToNext())
 
-        val livroBD = Jogo.fromCursor(cursor)
+        val jogoBD = Jogo.fromCursor(cursor)
 
-        assertEquals(jogo1, livroBD)
+        assertEquals(livro1, jogoBD)
 
-        val cursorTodosLivros = tabelaLivros.consulta(
+        val cursorTodosLivros = tabelaJogos.consulta(
             TabelaJogos.CAMPOS,
             null, null, null, null,
             TabelaJogos.CAMPO_TITULO
@@ -185,13 +185,13 @@ class BdInstrumentedTest {
         val categoria2 = Categoria("MMO")
         insereCategoria(bd, categoria2)
 
-        val jogo = Jogo("...", null,categoria1.id)
+        val jogo = Jogo("...", null,categoria1)
         insereJogo(bd, jogo)
 
         val novaDataPub = Calendar.getInstance()
         novaDataPub.set(1968, 1, 1)
 
-        jogo.idCategoria = categoria1.id
+        jogo.categoria = categoria1
         jogo.titulo = "Dark Souls III"
         jogo.dataPublicacao = novaDataPub
 
@@ -227,7 +227,7 @@ class BdInstrumentedTest {
         val categoria = Categoria("Programação")
         insereCategoria(bd, categoria)
 
-        val jogo = Jogo("...", null, categoria.id)
+        val jogo = Jogo("...", null, categoria)
         insereJogo(bd, jogo)
 
         val registosEliminados = TabelaJogos(bd).elimina(

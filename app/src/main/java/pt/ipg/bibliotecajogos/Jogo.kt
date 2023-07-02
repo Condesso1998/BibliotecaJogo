@@ -8,7 +8,7 @@ import java.util.Calendar
 data class Jogo(
     var titulo: String,
     var dataPublicacao: Calendar? = null,
-    var idCategoria: Long,
+    var categoria: Categoria,
     var id: Long = -1
 ) {
     fun toContentValues() : ContentValues {
@@ -16,7 +16,7 @@ data class Jogo(
 
         valores.put(TabelaJogos.CAMPO_TITULO, titulo)
         valores.put(TabelaJogos.CAMPO_DATA_PUB, dataPublicacao?.timeInMillis)
-        valores.put(TabelaJogos.CAMPO_FK_CATEGORIA, idCategoria)
+        valores.put(TabelaJogos.CAMPO_FK_CATEGORIA, categoria.id)
 
         return valores
     }
@@ -27,6 +27,7 @@ data class Jogo(
             val posTitulo = cursor.getColumnIndex(TabelaJogos.CAMPO_TITULO)
             val posDataPub = cursor.getColumnIndex(TabelaJogos.CAMPO_DATA_PUB)
             val posCategoriaFK = cursor.getColumnIndex(TabelaJogos.CAMPO_FK_CATEGORIA)
+            val posDescCateg = cursor.getColumnIndex(TabelaJogos.CAMPO_DESC_CATEGORIA)
 
             val id = cursor.getLong(posId)
             val titulo = cursor.getString(posTitulo)
@@ -41,8 +42,10 @@ data class Jogo(
             }
 
             val categoriaId = cursor.getLong(posCategoriaFK)
+            val desricaoCategoria = cursor.getString(posDescCateg)
 
-            return Jogo(titulo, dataPub, categoriaId, id)
+            return Jogo(titulo, dataPub, Categoria(desricaoCategoria, categoriaId), id)
+
         }
     }
 }

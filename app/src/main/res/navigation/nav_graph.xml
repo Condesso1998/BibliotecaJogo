@@ -32,5 +32,18 @@
         android:id="@+id/listaJogosFragment"
         android:name="pt.ipg.bibliotecajogos.ListaJogosFragment"
         android:label="fragment_lista_jogos"
-        tools:layout="@layout/fragment_lista_jogos" />
+        tools:layout="@layout/fragment_lista_jogos" >
+        <action
+            android:id="@+id/action_ListaLivrosFragment_to_novoLivroFragment"
+            app:destination="@id/novoJogoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/novoJogoFragment"
+        android:name="pt.ipg.bibliotecajogos.NovoJogoFragment"
+        android:label="fragment_novo_jogo"
+        tools:layout="@layout/fragment_novo_jogo" >
+        <action
+            android:id="@+id/action_novoLivroFragment_to_ListaLivrosFragment"
+            app:destination="@id/listaJogosFragment" />
+    </fragment>
 </navigation>

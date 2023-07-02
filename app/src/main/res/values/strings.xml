@@ -18,4 +18,5 @@ Rui Condesso
     <string name="adicionar">Adicionar</string>
     <string name="editar">Editar</string>
     <string name="eliminar">Eliminar</string>
+    <string name="novo_jogo_label">Novo jogo</string>
 </resources>

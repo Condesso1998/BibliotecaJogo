@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.loader.app.LoaderManager
+import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.recyclerview.widget.LinearLayoutManager
 import pt.ipg.bibliotecajogos.databinding.FragmentListaJogosBinding
@@ -57,7 +58,13 @@ class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-        TODO("Not yet implemented")
+        return CursorLoader(
+            requireContext(),
+            JogosContentProvider.ENDERECO_JOGOS,
+            TabelaJogos.CAMPOS,
+            null, null,
+            TabelaJogos.CAMPO_TITULO
+        )
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {

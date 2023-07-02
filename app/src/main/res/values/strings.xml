@@ -19,4 +19,7 @@ Rui Condesso
     <string name="editar">Editar</string>
     <string name="eliminar">Eliminar</string>
     <string name="novo_jogo_label">Novo jogo</string>
+    <string name="titulo">Título</string>
+    <string name="categoria">Categoria</string>
+    <string name="data_publicacao">Data publicação</string>
 </resources>

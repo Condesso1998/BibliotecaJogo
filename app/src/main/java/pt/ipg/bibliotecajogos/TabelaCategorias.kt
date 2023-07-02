@@ -1,6 +1,7 @@
 package pt.ipg.bibliotecajogos
 
 import android.database.sqlite.SQLiteDatabase
+import android.provider.BaseColumns
 
 class TabelaCategorias(db: SQLiteDatabase) : TabelaBD(db, NOME_TABELA) {
     override fun cria() {
@@ -10,5 +11,7 @@ class TabelaCategorias(db: SQLiteDatabase) : TabelaBD(db, NOME_TABELA) {
     companion object {
         const val NOME_TABELA = "categorias"
         const val CAMPO_DESCRICAO = "descricao"
+
+        val CAMPOS = arrayOf(BaseColumns._ID, CAMPO_DESCRICAO)
     }
 }

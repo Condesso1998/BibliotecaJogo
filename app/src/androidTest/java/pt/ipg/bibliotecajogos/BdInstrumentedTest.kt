@@ -2,6 +2,7 @@ package pt.ipg.bibliotecajogos
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import android.provider.BaseColumns
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 
@@ -75,6 +76,42 @@ class BdInstrumentedTest {
     private fun insereJogo(bd: SQLiteDatabase, jogo: Jogo) {
         jogo.id = TabelaJogos(bd).insere(jogo.toContentValues())
         assertNotEquals(-1, jogo.id)
+    }
+
+    @Test
+    fun consegueLerCategorias() {
+        val bd = getWritableDatabase()
+
+        val categRomance = Categoria("Romance")
+        insereCategoria(bd, categRomance)
+
+        val categFiccao = Categoria("Ficção Científica")
+        insereCategoria(bd, categFiccao)
+
+        val tabelaCategorias = TabelaCategorias(bd)
+
+        val cursor = tabelaCategorias.consulta(
+            TabelaCategorias.CAMPOS,
+            "${BaseColumns._ID}=?",
+            arrayOf(categFiccao.id.toString()),
+            null,
+            null,
+            null
+        )
+
+        assert(cursor.moveToNext())
+
+        val categBD = Categoria.fromCursor(cursor)
+
+        assertEquals(categFiccao, categBD)
+
+        val cursorTodasCategorias = tabelaCategorias.consulta(
+            TabelaCategorias.CAMPOS,
+            null, null, null, null,
+            TabelaCategorias.CAMPO_DESCRICAO
+        )
+
+        assert(cursorTodasCategorias.count > 1)
     }
 
 }

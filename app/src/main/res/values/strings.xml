@@ -15,4 +15,7 @@ Rui Condesso
     <string name="jogos">Jogos</string>
     <string name="categorias">Categorias</string>
     <string name="pesquisa">Pesquisa</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="editar">Editar</string>
+    <string name="eliminar">Eliminar</string>
 </resources>

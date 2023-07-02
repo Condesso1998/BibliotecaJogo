@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_ListaJogosFragment_to_novoJogoFragment"
             app:destination="@id/novoJogoFragment" />
+        <action
+            android:id="@+id/action_listaJogosFragment_to_eliminarJogoFragment"
+            app:destination="@id/eliminarJogoFragment" />
     </fragment>
     <fragment
         android:id="@+id/novoJogoFragment"
@@ -44,6 +47,15 @@
         tools:layout="@layout/fragment_novo_jogo" >
         <action
             android:id="@+id/action_novoJogoFragment_to_ListaJogosFragment"
+            app:destination="@id/listaJogosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eliminarJogoFragment"
+        android:name="pt.ipg.bibliotecajogos.EliminarJogoFragment"
+        android:label="fragment_eliminar_jogo"
+        tools:layout="@layout/fragment_eliminar_jogo" >
+        <action
+            android:id="@+id/action_eliminarJogoFragment_to_listaJogosFragment"
             app:destination="@id/listaJogosFragment" />
     </fragment>
 </navigation>

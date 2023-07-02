@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-class AdapterJogos : RecyclerView.Adapter<AdapterJogos.ViewHolderJogo>() {
+class AdapterJogos(val fragment: ListaJogosFragment) : RecyclerView.Adapter<AdapterJogos.ViewHolderJogo>() {
 
     var cursor: Cursor? = null
         set(value) {
@@ -42,7 +42,9 @@ class AdapterJogos : RecyclerView.Adapter<AdapterJogos.ViewHolderJogo>() {
      * @see .onBindViewHolder
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderJogo {
-        TODO("Not yet implemented")
+        return ViewHolderJogo(
+            fragment.layoutInflater.inflate(R.layout.item_jogo, parent, false)
+        )
     }
 
     /**

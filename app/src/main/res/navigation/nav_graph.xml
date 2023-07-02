@@ -34,7 +34,7 @@
         android:label="fragment_lista_jogos"
         tools:layout="@layout/fragment_lista_jogos" >
         <action
-            android:id="@+id/action_ListaLivrosFragment_to_novoLivroFragment"
+            android:id="@+id/action_ListaJogosFragment_to_novoJogoFragment"
             app:destination="@id/novoJogoFragment" />
     </fragment>
     <fragment
@@ -43,7 +43,7 @@
         android:label="fragment_novo_jogo"
         tools:layout="@layout/fragment_novo_jogo" >
         <action
-            android:id="@+id/action_novoLivroFragment_to_ListaLivrosFragment"
+            android:id="@+id/action_novoJogoFragment_to_ListaJogosFragment"
             app:destination="@id/listaJogosFragment" />
     </fragment>
 </navigation>

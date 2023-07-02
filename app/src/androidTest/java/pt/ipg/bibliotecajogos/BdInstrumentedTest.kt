@@ -157,4 +157,85 @@ class BdInstrumentedTest {
         assert(cursorTodosLivros.count > 1)
     }
 
+    @Test
+    fun consegueAlterarCategorias() {
+        val bd = getWritableDatabase()
+
+        val categoria = Categoria("...")
+        insereCategoria(bd, categoria)
+
+        categoria.descricao = "Poesia"
+
+        val registosAlterados = TabelaCategorias(bd).altera(
+            categoria.toContentValues(),
+            "${BaseColumns._ID}=?",
+            arrayOf(categoria.id.toString())
+        )
+
+        assertEquals(1, registosAlterados)
+    }
+
+    @Test
+    fun consegueAlterarLivros() {
+        val bd = getWritableDatabase()
+
+        val categoria1 = Categoria("Ação")
+        insereCategoria(bd, categoria1)
+
+        val categoria2 = Categoria("MMO")
+        insereCategoria(bd, categoria2)
+
+        val jogo = Jogo("...", null,categoria1.id)
+        insereJogo(bd, jogo)
+
+        val novaDataPub = Calendar.getInstance()
+        novaDataPub.set(1968, 1, 1)
+
+        jogo.idCategoria = categoria1.id
+        jogo.titulo = "Dark Souls III"
+        jogo.dataPublicacao = novaDataPub
+
+
+        val registosAlterados = TabelaJogos(bd).altera(
+            jogo.toContentValues(),
+            "${BaseColumns._ID}=?",
+            arrayOf(jogo.id.toString())
+        )
+
+        assertEquals(1, registosAlterados)
+    }
+
+    @Test
+    fun consegueApagarCategorias() {
+        val bd = getWritableDatabase()
+
+        val categoria = Categoria("...")
+        insereCategoria(bd, categoria)
+
+        val registosEliminados = TabelaCategorias(bd).elimina(
+            "${BaseColumns._ID}=?",
+            arrayOf(categoria.id.toString())
+        )
+
+        assertEquals(1, registosEliminados)
+    }
+
+    @Test
+    fun consegueApagarLivros() {
+        val bd = getWritableDatabase()
+
+        val categoria = Categoria("Programação")
+        insereCategoria(bd, categoria)
+
+        val jogo = Jogo("...", null, categoria.id)
+        insereJogo(bd, jogo)
+
+        val registosEliminados = TabelaJogos(bd).elimina(
+            "${BaseColumns._ID}=?",
+            arrayOf(jogo.id.toString())
+        )
+
+        assertEquals(1, registosEliminados)
+    }
+
 }

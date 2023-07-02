@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
+import android.provider.BaseColumns
 
 class JogosContentProvider : ContentProvider() {
     private var bdOpenHelper : BdJogosOpenHelper? = null
@@ -114,7 +115,29 @@ class JogosContentProvider : ContentProvider() {
         selectionArgs: Array<out String>?,
         sortOrder: String?
     ): Cursor? {
-        TODO("Not yet implemented")
+        val bd = bdOpenHelper!!.readableDatabase
+
+        val endereco = uriMatcher().match(uri)
+        val tabela = when (endereco) {
+            URI_CATEGORIAS, URI_CATEGORIA_ID -> TabelaCategorias(bd)
+            URI_JOGOS, URI_JOGO_ID -> TabelaJogos(bd)
+            else -> null
+        }
+
+        val id = uri.lastPathSegment
+
+        val (selecao, argsSel) = when (endereco) {
+            URI_CATEGORIA_ID, URI_JOGO_ID -> Pair("${BaseColumns._ID}=?", arrayOf(id))
+            else -> Pair(selection, selectionArgs)
+        }
+
+        return tabela?.consulta(
+            projection as Array<String>,
+            selecao,
+            argsSel as Array<String>?,
+            null,
+            null,
+            sortOrder)
     }
 
     /**
@@ -214,11 +237,15 @@ class JogosContentProvider : ContentProvider() {
         const val JOGOS = "jogos"
 
         private const val URI_CATEGORIAS = 100
+        private const val URI_CATEGORIA_ID = 101
         private const val URI_JOGOS = 200
+        private const val URI_JOGO_ID = 201
 
         fun uriMatcher() = UriMatcher(UriMatcher.NO_MATCH).apply {
             addURI(AUTORIDADE, CATEGORIAS, URI_CATEGORIAS)
+            addURI(AUTORIDADE, "$CATEGORIAS/#", URI_CATEGORIA_ID)
             addURI(AUTORIDADE, JOGOS, URI_JOGOS)
+            addURI(AUTORIDADE, "$JOGOS/#", URI_JOGO_ID)
         }
     }
 }

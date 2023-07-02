@@ -4,7 +4,7 @@ import android.content.ContentValues
 
 data class Jogo(
     var titulo: String,
-    var idCategoria: Int,
+    var idCategoria: Long,
     var id: Long = -1
 ) {
     fun toContentValues() : ContentValues {

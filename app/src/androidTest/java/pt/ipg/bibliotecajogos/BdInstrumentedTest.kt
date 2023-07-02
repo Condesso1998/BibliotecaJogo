@@ -1,6 +1,7 @@
 package pt.ipg.bibliotecajogos
 
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 
@@ -9,7 +10,6 @@ import org.junit.runner.RunWith
 
 import org.junit.Assert.*
 import org.junit.Before
-import pt.ipg.bibliotecajogos.BdJogosOpenHelper
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -18,14 +18,15 @@ import pt.ipg.bibliotecajogos.BdJogosOpenHelper
  */
 @RunWith(AndroidJUnit4::class)
 class BdInstrumentedTest {
-
     private fun getAppContext(): Context =
         InstrumentationRegistry.getInstrumentation().targetContext
+
 
     @Before
     fun apagaBaseDados() {
         getAppContext().deleteDatabase(BdJogosOpenHelper.NOME_BASE_DADOS)
     }
+
 
     @Test
     fun consegueAbrirBaseDados() {
@@ -34,13 +35,46 @@ class BdInstrumentedTest {
         assert(bd.isOpen)
     }
 
+
+    private fun getWritableDatabase(): SQLiteDatabase {
+        val openHelper = BdJogosOpenHelper(getAppContext())
+        return openHelper.writableDatabase
+    }
+
+
     @Test
     fun consegueInserirCategorias() {
-        val openHelper = BdJogosOpenHelper(getAppContext())
-        val bd = openHelper.writableDatabase
+        val bd = getWritableDatabase()
 
         val categoria = Categoria("Ação")
-        val id = TabelaCategorias(bd).insere(categoria.toContentValues())
-        assertNotEquals(-1, id)
+        insereCategoria(bd, categoria)
     }
+
+    private fun insereCategoria(
+        bd: SQLiteDatabase,
+        categoria: Categoria
+    ) {
+        categoria.id = TabelaCategorias(bd).insere(categoria.toContentValues())
+        assertNotEquals(-1, categoria.id)
+    }
+
+    @Test
+    fun consegueInserirJogos() {
+        val bd = getWritableDatabase()
+
+        val categoria = Categoria("RPG")
+        insereCategoria(bd, categoria)
+
+        val jogo1 = Jogo("Dark Souls III", categoria.id)
+        insereLivro(bd, jogo1)
+
+        val jogo2 = Jogo("Metal Gear V", categoria.id)
+        insereLivro(bd, jogo2)
+    }
+
+    private fun insereLivro(bd: SQLiteDatabase, jogo: Jogo) {
+        jogo.id = TabelaJogos(bd).insere(jogo.toContentValues())
+        assertNotEquals(-1, jogo.id)
+    }
+
 }

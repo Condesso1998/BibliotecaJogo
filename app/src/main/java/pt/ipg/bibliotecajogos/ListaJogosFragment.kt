@@ -14,6 +14,12 @@ import pt.ipg.bibliotecajogos.databinding.FragmentListaJogosBinding
 
 private const val ID_LOADER_JOGOS = 0
 
+private val adapterJogos1: AdapterJogos
+    get() {
+        val adapterJogos = AdapterJogos()
+        return adapterJogos
+    }
+
 /**
  * A simple [Fragment] subclass.
  * Use the [ListaLivrosFragment.newInstance] factory method to
@@ -43,6 +49,8 @@ class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         _binding = null
     }
 
+    private val adapterJogos = AdapterJogos()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -68,10 +76,10 @@ class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        TODO("Not yet implemented")
+        adapterJogos.cursor = null
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-        TODO("Not yet implemented")
+        adapterJogos.cursor = data
     }
 }

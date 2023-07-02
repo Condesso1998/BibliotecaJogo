@@ -1,11 +1,19 @@
 package pt.ipg.bibliotecajogos
 
+import android.database.Cursor
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
 class AdapterJogos : RecyclerView.Adapter<AdapterJogos.ViewHolderJogo>() {
+
+    var cursor: Cursor? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     inner class ViewHolderJogo(itemView: View) : ViewHolder(itemView) {
 
     }

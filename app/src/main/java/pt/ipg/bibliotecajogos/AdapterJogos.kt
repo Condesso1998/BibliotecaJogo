@@ -14,8 +14,8 @@ class AdapterJogos(val fragment: ListaJogosFragment) : RecyclerView.Adapter<Adap
             notifyDataSetChanged()
         }
 
-    inner class ViewHolderJogo(itemView: View) : ViewHolder(itemView) {
-
+    inner class ViewHolderJogo(contentor: View) : ViewHolder(contentor) {
+        internal var jogo: Jogo? = null
     }
 
     /**
@@ -78,6 +78,7 @@ class AdapterJogos(val fragment: ListaJogosFragment) : RecyclerView.Adapter<Adap
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ViewHolderJogo, position: Int) {
-        TODO("Not yet implemented")
+        cursor!!.move(position)
+        holder.jogo = Jogo.fromCursor(cursor!!)
     }
 }

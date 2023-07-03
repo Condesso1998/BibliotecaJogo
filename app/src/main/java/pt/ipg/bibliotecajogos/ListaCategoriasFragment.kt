@@ -16,6 +16,9 @@ import pt.ipg.bibliotecajogos.databinding.FragmentListaCategoriasBinding
  * Use the [ListaCategoriasFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+private const val ID_LOADER_CATEGORIAS = 1
+
 class ListaCategoriasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     private var _binding: FragmentListaCategoriasBinding? = null
 
@@ -41,6 +44,9 @@ class ListaCategoriasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor
         val adapterCategorias = AdapterCategorias()
         binding.recyclerViewCategorias.adapter = adapterCategorias
         binding.recyclerViewCategorias.layoutManager = LinearLayoutManager(requireContext())
+
+        val loader = LoaderManager.getInstance(this)
+        loader.initLoader(ID_LOADER_CATEGORIAS, null, this)
     }
 
     companion object {

@@ -16,7 +16,7 @@ class AdapterJogos(val fragment: ListaJogosFragment) : RecyclerView.Adapter<Adap
         }
 
     inner class ViewHolderJogo(contentor: View) : ViewHolder(contentor) {
-        private val textViewTitulo = contentor.findViewById<TextView>(R.id.textViewTitulo)
+        private val textViewTitulo = contentor.findViewById<TextView>(R.id.textViewDesc)
         private val textViewCategoria = contentor.findViewById<TextView>(R.id.textViewCategoria)
 
         init {

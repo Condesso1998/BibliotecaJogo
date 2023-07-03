@@ -3,6 +3,7 @@ package pt.ipg.bibliotecajogos
 import android.database.Cursor
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
@@ -16,8 +17,14 @@ class AdapterCategorias(val fragment: ListaCategoriasFragment) : RecyclerView.Ad
             notifyDataSetChanged()
         }
 
-    inner class ViewHolderCategoria(itemView: View) : ViewHolder(itemView) {
+    inner class ViewHolderCategoria(contentor: View) : ViewHolder(contentor) {
+        private val textViewDesc = contentor.findViewById<TextView>(R.id.textViewDesc)
 
+        internal var categoria: Categoria? = null
+            set(value) {
+                field = value
+                textViewDesc.text = categoria?.descricao ?: ""
+            }
     }
 
     /**
@@ -80,6 +87,7 @@ class AdapterCategorias(val fragment: ListaCategoriasFragment) : RecyclerView.Ad
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ViewHolderCategoria, position: Int) {
-        TODO("Not yet implemented")
+        cursor!!.move(position)
+        holder.categoria = Categoria.fromCursor(cursor!!)
     }
 }

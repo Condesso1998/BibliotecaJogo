@@ -18,7 +18,7 @@ private const val ID_LOADER_JOGOS = 0
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ListaLivrosFragment.newInstance] factory method to
+ * Use the [ListaJogosFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
@@ -118,7 +118,8 @@ class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun editarLivro() {
-
+        val acao = ListaJogosFragmentDirections.actionListaJogosFragmentToNovoJogoFragment(jogoSelecionado!!)
+        findNavController().navigate(acao)
     }
 
     private fun adicionaLivro() {

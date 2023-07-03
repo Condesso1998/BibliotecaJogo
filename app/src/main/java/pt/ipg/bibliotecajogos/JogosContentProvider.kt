@@ -272,7 +272,7 @@ class JogosContentProvider : ContentProvider() {
     }
 
     companion object {
-        private const val AUTORIDADE = "pt.ipg.livros"
+        private const val AUTORIDADE = "pt.ipg.bibliotecajogos"
 
         private const val CATEGORIAS = "categorias"
         private const val JOGOS = "jogos"

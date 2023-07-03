@@ -60,14 +60,14 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
                 true
             }
             R.id.action_cancelar -> {
-                voltaListaLivros()
+                voltaListaJogos()
                 true
             }
             else -> false
         }
     }
 
-    private fun voltaListaLivros() {
+    private fun voltaListaJogos() {
         findNavController().navigate(R.id.action_novoJogoFragment_to_ListaJogosFragment)
     }
 
@@ -111,7 +111,7 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         }
 
         Toast.makeText(requireContext(), getString(R.string.jogo_guardado_com_sucesso), Toast.LENGTH_SHORT).show()
-        voltaListaLivros()
+        voltaListaJogos()
     }
 
     /**

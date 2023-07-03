@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_MenuPrincipalFragment_to_ListaJogosFragment"
             app:destination="@id/listaJogosFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_listaCategoriasFragment"
+            app:destination="@id/listaCategoriasFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -48,6 +51,10 @@
         <action
             android:id="@+id/action_novoJogoFragment_to_ListaJogosFragment"
             app:destination="@id/listaJogosFragment" />
+        <argument
+            android:name="jogo"
+            app:argType="pt.ipg.bibliotecajogos.Jogo"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/eliminarJogoFragment"
@@ -61,4 +68,9 @@
             android:name="jogo"
             app:argType="pt.ipg.bibliotecajogos.Jogo" />
     </fragment>
+    <fragment
+        android:id="@+id/listaCategoriasFragment"
+        android:name="pt.ipg.bibliotecajogos.ListaCategoriasFragment"
+        android:label="fragment_lista_categorias"
+        tools:layout="@layout/fragment_lista_categorias" />
 </navigation>

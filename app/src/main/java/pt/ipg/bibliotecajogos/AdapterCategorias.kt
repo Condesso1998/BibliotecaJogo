@@ -53,7 +53,7 @@ class AdapterCategorias : RecyclerView.Adapter<AdapterCategorias.ViewHolderCateg
      * @return The total number of items in this adapter.
      */
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return cursor?.count ?: 0
     }
 
     /**

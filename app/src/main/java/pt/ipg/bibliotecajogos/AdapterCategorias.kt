@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
 
 
-class AdapterCategorias : RecyclerView.Adapter<AdapterCategorias.ViewHolderCategoria>() {
+class AdapterCategorias(val fragment: ListaCategoriasFragment) : RecyclerView.Adapter<AdapterCategorias.ViewHolderCategoria>() {
 
     var cursor: Cursor? = null
         set(value) {
@@ -44,7 +44,9 @@ class AdapterCategorias : RecyclerView.Adapter<AdapterCategorias.ViewHolderCateg
      * @see .onBindViewHolder
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderCategoria {
-        TODO("Not yet implemented")
+        return ViewHolderCategoria(
+            fragment.layoutInflater.inflate(R.layout.item_categoria, parent, false)
+        )
     }
 
     /**

@@ -30,7 +30,7 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentNovoJogoBinding.inflate(inflater, container, false)
         return binding.root
@@ -81,7 +81,7 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
         val categoriaId = binding.spinnerCategorias.selectedItemId
 
-        val data: Date
+        val data: Date?
         val df = SimpleDateFormat("dd-MM-yyyy")
         try {
             data = df.parse(binding.editTextDataPub.text.toString())
@@ -145,7 +145,9 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
      * @param loader The Loader that is being reset.
      */
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        binding.spinnerCategorias.adapter = null
+        if (_binding != null) {
+            binding.spinnerCategorias.adapter = null
+        }
     }
 
     /**
@@ -169,7 +171,7 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
      * them to you through new calls here.  You should not monitor the
      * data yourself.  For example, if the data is a [android.database.Cursor]
      * and you place it in a [android.widget.CursorAdapter], use
-     * the [android.widget.CursorAdapter.CursorAdapter] constructor *without* passing
+     * the [android.widget.CursorAdapter] constructor *without* passing
      * in either [android.widget.CursorAdapter.FLAG_AUTO_REQUERY]
      * or [android.widget.CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER]
      * (that is, use 0 for the flags argument).  This prevents the CursorAdapter

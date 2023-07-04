@@ -16,11 +16,7 @@ import pt.ipg.bibliotecajogos.databinding.FragmentListaJogosBinding
 
 private const val ID_LOADER_JOGOS = 0
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ListaJogosFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     private var _binding: FragmentListaJogosBinding? = null
 
@@ -46,7 +42,7 @@ class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentListaJogosBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -91,7 +87,9 @@ class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-        adapterJogos!!.cursor = data
+        if (adapterJogos != null) {
+            adapterJogos!!.cursor = null
+        }
     }
 
     fun processaOpcaoMenu(item: MenuItem) : Boolean {

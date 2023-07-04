@@ -45,7 +45,11 @@ class NovaCategoriaFragment : Fragment() {
         val categoria = NovaCategoriaFragmentArgs.fromBundle(requireArguments()).categoria
 
         if (categoria != null) {
+            activity.atualizaTitulo(R.string.editar_categoria_label)
+
             binding.editTextTitulo.setText(categoria.descricao)
+        }else{
+            activity.atualizaTitulo(R.string.nova_categoria_label)
         }
 
         this.categoria = categoria

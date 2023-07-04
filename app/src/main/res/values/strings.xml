@@ -26,11 +26,12 @@ Rui Condesso
     <string name="cancelar">Cancelar</string>
     <string name="titulo_obrigatorio">Deve preencher o título</string>
     <string name="data_invalida">Data inválida</string>
-    <string name="jogo_guardado_com_sucesso">Livro guardado com sucesso</string>
+    <string name="jogo_guardado_com_sucesso">Jogo guardado com sucesso</string>
     <string name="categoria_guardada_com_sucesso">Categoria guardada com sucesso</string>
     <string name="erro_guardar_categoria">Não foi possível guardar a categoria</string>
     <string name="erro_guardar_jogo">Não foi possível guardar o jogo</string>
-    <string name="eliminar_livro_label">Eliminar jogo</string>
+    <string name="eliminar_jogo_label">Eliminar jogo</string>
+    <string name="eliminar_categoria_label">Eliminar categoria</string>
     <string name="hello_blank_fragment">Hello</string>
     <string name="jogo_eliminado_com_sucesso">Jogo eliminado com sucesso</string>
     <string name="categoria_eliminada_com_sucesso">Ctaegoria eliminada com sucesso</string>
@@ -38,5 +39,6 @@ Rui Condesso
     <string name="erro_eliminar_categoria">Erro ao eliminar categoria</string>
     <string name="nova_categoria_label">Nova categoria</string>
     <string name="editar_jogo_label">Editar Jogo</string>
+    <string name="editar_categoria_label">Editar Categoria</string>
     <string name="desc">Nome da Categoria</string>
 </resources>

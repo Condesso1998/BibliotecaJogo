@@ -1,6 +1,7 @@
 package pt.ipg.bibliotecajogos
 
 import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.LayoutInflater
@@ -109,12 +110,39 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         val calendario = Calendar.getInstance()
         calendario.time = data
 
-        val jogo = Jogo(
-            titulo,
-            calendario,
-            Categoria("?", categoriaId)
-        )
+        if(jogo == null){
+            val jogo = Jogo(
+                titulo,
+                calendario,
+                Categoria("?", categoriaId)
+            )
 
+            insereJogo(jogo)
+        }else{
+            val jogo = jogo!!
+            jogo.titulo = titulo
+            jogo.categoria = Categoria("?", categoriaId)
+            jogo.dataPublicacao = calendario
+
+            alteraJogo(jogo)
+        }
+    }
+
+    private fun alteraJogo(jogo: Jogo) {
+        val enderecoJogo = Uri.withAppendedPath(JogosContentProvider.ENDERECO_JOGOS, jogo.id.toString())
+        val jogosAlterados = requireActivity().contentResolver.update(enderecoJogo, jogo.toContentValues(), null, null)
+
+        if (jogosAlterados == 1) {
+            Toast.makeText(requireContext(), R.string.jogo_guardado_com_sucesso, Toast.LENGTH_LONG).show()
+            voltaListaJogos()
+        } else {
+            binding.editTextTitulo.error = getString(R.string.erro_guardar_jogo)
+        }
+    }
+
+    private fun insereJogo(
+        jogo: Jogo
+    ) {
         val id = requireActivity().contentResolver.insert(
             JogosContentProvider.ENDERECO_JOGOS,
             jogo.toContentValues()
@@ -125,7 +153,12 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
             return
         }
 
-        Toast.makeText(requireContext(), getString(R.string.jogo_guardado_com_sucesso), Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.jogo_guardado_com_sucesso),
+            Toast.LENGTH_SHORT
+        ).show()
+
         voltaListaJogos()
     }
 

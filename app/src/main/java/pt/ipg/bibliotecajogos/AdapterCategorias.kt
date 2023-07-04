@@ -20,12 +20,30 @@ class AdapterCategorias(val fragment: ListaCategoriasFragment) : RecyclerView.Ad
     inner class ViewHolderCategoria(contentor: View) : ViewHolder(contentor) {
         private val textViewDesc = contentor.findViewById<TextView>(R.id.textViewDesc)
 
+        init {
+            contentor.setOnClickListener {
+                viewHolderSeleccionado?.desSeleciona()
+                seleciona()
+            }
+        }
+
         internal var categoria: Categoria? = null
             set(value) {
                 field = value
                 textViewDesc.text = categoria?.descricao ?: ""
             }
+
+        fun seleciona() {
+            viewHolderSeleccionado = this
+            itemView.setBackgroundResource(R.color.item_selecionado)
+        }
+
+        fun desSeleciona() {
+            itemView.setBackgroundResource(android.R.color.white)
+        }
     }
+
+    private var viewHolderSeleccionado : ViewHolderCategoria? = null
 
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
@@ -87,7 +105,7 @@ class AdapterCategorias(val fragment: ListaCategoriasFragment) : RecyclerView.Ad
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ViewHolderCategoria, position: Int) {
-        cursor!!.move(position)
+        cursor!!.moveToPosition(position)
         holder.categoria = Categoria.fromCursor(cursor!!)
     }
 }

@@ -86,4 +86,13 @@
             android:id="@+id/action_novaCategoriaFragment_to_listaCategoriasFragment"
             app:destination="@id/listaCategoriasFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/eliminarCategoriaFragment"
+        android:name="pt.ipg.bibliotecajogos.EliminarCategoriaFragment"
+        android:label="fragment_eliminar_categoria"
+        tools:layout="@layout/fragment_eliminar_categoria" >
+        <action
+            android:id="@+id/action_eliminarCategoriaFragment_to_listaCategoriasFragment"
+            app:destination="@id/listaCategoriasFragment" />
+    </fragment>
 </navigation>

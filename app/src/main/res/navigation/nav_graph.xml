@@ -94,5 +94,8 @@
         <action
             android:id="@+id/action_eliminarCategoriaFragment_to_listaCategoriasFragment"
             app:destination="@id/listaCategoriasFragment" />
+        <argument
+            android:name="categoria"
+            app:argType="pt.ipg.bibliotecajogos.Categoria" />
     </fragment>
 </navigation>

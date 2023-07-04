@@ -4,6 +4,7 @@ import android.database.Cursor
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.loader.app.LoaderManager
@@ -145,5 +146,35 @@ class ListaCategoriasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor
      */
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
         adapterCategorias!!.cursor = data
+    }
+
+    fun processaOpcaoMenu(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.action_adicionar -> {
+                adicionaLivro()
+                true
+            }
+            R.id.action_editar -> {
+                editarLivro()
+                true
+            }
+            R.id.action_eliminar -> {
+                eliminarLivro()
+                true
+            }
+            else -> false
+        }
+    }
+
+    private fun eliminarLivro() {
+
+    }
+
+    private fun editarLivro() {
+
+    }
+
+    private fun adicionaLivro() {
+
     }
 }

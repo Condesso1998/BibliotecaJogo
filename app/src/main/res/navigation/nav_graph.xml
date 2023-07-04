@@ -81,5 +81,9 @@
         android:id="@+id/novaCategoriaFragment"
         android:name="pt.ipg.bibliotecajogos.NovaCategoriaFragment"
         android:label="fragment_nova_categoria"
-        tools:layout="@layout/fragment_nova_categoria" />
+        tools:layout="@layout/fragment_nova_categoria" >
+        <action
+            android:id="@+id/action_novaCategoriaFragment_to_listaCategoriasFragment"
+            app:destination="@id/listaCategoriasFragment" />
+    </fragment>
 </navigation>

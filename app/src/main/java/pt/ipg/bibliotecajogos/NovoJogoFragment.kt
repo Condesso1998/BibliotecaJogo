@@ -25,6 +25,7 @@ private const val ID_LOADER_CATEGORIAS = 0
 class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     private var jogo: Jogo?= null
     private var _binding: FragmentNovoJogoBinding? = null
+    private var dataPub: Calendar? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -43,6 +44,11 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.calendarViewDataPub.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
+            if (dataPub == null) dataPub = Calendar.getInstance()
+            dataPub!!.set(year, month, dayOfMonth)
+        }
+
         val loader = LoaderManager.getInstance(this)
         loader.initLoader(ID_LOADER_CATEGORIAS, null, this)
 
@@ -53,12 +59,15 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         val jogo = NovoJogoFragmentArgs.fromBundle(requireArguments()).jogo
 
         if (jogo != null) {
+            activity.atualizaTitulo(R.string.editar_jogo_label)
+
             binding.editTextTitulo.setText(jogo.titulo)
             if (jogo.dataPublicacao != null) {
-                binding.editTextDataPub.setText(
-                    DateFormat.format("yyyy-MM-dd", jogo.dataPublicacao)
-                )
+                dataPub = jogo.dataPublicacao
+                binding.calendarViewDataPub.date = dataPub!!.timeInMillis
             }
+        }else{
+            activity.atualizaTitulo(R.string.novo_jogo_label)
         }
 
         this.jogo = jogo
@@ -97,23 +106,10 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
         val categoriaId = binding.spinnerCategorias.selectedItemId
 
-        val data: Date?
-        val df = SimpleDateFormat("dd-MM-yyyy")
-        try {
-            data = df.parse(binding.editTextDataPub.text.toString())
-        } catch (e: Exception) {
-            binding.editTextDataPub.error = getString(R.string.data_invalida)
-            binding.editTextDataPub.requestFocus()
-            return
-        }
-
-        val calendario = Calendar.getInstance()
-        calendario.time = data
-
         if(jogo == null){
             val jogo = Jogo(
                 titulo,
-                calendario,
+                dataPub,
                 Categoria("?", categoriaId)
             )
 
@@ -122,7 +118,7 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
             val jogo = jogo!!
             jogo.titulo = titulo
             jogo.categoria = Categoria("?", categoriaId)
-            jogo.dataPublicacao = calendario
+            jogo.dataPublicacao = dataPub
 
             alteraJogo(jogo)
         }

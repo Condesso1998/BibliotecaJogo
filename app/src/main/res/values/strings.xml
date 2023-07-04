@@ -32,4 +32,5 @@ Rui Condesso
     <string name="hello_blank_fragment">Hello</string>
     <string name="jogo_eliminado_com_sucesso">Livro eliminado com sucesso</string>
     <string name="erro_eliminar_jogo">Erro ao eliminar livro</string>
+    <string name="nova_categoria_label">Nova categoria</string>
 </resources>

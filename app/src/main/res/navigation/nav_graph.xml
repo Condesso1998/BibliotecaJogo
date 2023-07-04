@@ -73,4 +73,9 @@
         android:name="pt.ipg.bibliotecajogos.ListaCategoriasFragment"
         android:label="fragment_lista_categorias"
         tools:layout="@layout/fragment_lista_categorias" />
+    <fragment
+        android:id="@+id/novaCategoriaFragment"
+        android:name="pt.ipg.bibliotecajogos.NovaCategoriaFragment"
+        android:label="fragment_nova_categoria"
+        tools:layout="@layout/fragment_nova_categoria" />
 </navigation>

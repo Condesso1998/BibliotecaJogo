@@ -27,6 +27,8 @@ class ListaCategoriasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor
     // onDestroyView.
     private val binding get() = _binding!!
 
+    var categoriaSelecionada : Categoria? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

@@ -35,6 +35,7 @@ class AdapterCategorias(val fragment: ListaCategoriasFragment) : RecyclerView.Ad
 
         fun seleciona() {
             viewHolderSeleccionado = this
+            fragment.categoriaSelecionada = categoria
             itemView.setBackgroundResource(R.color.item_selecionado)
         }
 

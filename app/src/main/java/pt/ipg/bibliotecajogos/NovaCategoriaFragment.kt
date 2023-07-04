@@ -1,5 +1,7 @@
 package pt.ipg.bibliotecajogos
 
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
 import pt.ipg.bibliotecajogos.databinding.FragmentNovaCategoriaBinding
 import java.text.SimpleDateFormat
@@ -15,7 +18,7 @@ import java.util.Calendar
 import java.util.Date
 
 class NovaCategoriaFragment : Fragment() {
-    private var categoria: Categoria?= null
+    private var categoria: Categoria? = null
     private var _binding: FragmentNovaCategoriaBinding? = null
 
     // This property is only valid between onCreateView and
@@ -25,7 +28,7 @@ class NovaCategoriaFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentNovaCategoriaBinding.inflate(inflater, container, false)
         return binding.root
@@ -59,10 +62,12 @@ class NovaCategoriaFragment : Fragment() {
                 guardar()
                 true
             }
+
             R.id.action_cancelar -> {
                 voltaListaCategorias()
                 true
             }
+
             else -> false
         }
     }
@@ -72,17 +77,40 @@ class NovaCategoriaFragment : Fragment() {
     }
 
     private fun guardar() {
-        val titulo  = binding.editTextTitulo.text.toString()
+        val titulo = binding.editTextTitulo.text.toString()
         if (titulo.isBlank()) {
             binding.editTextTitulo.error = getString(R.string.titulo_obrigatorio)
             binding.editTextTitulo.requestFocus()
             return
         }
 
-        val categoria = Categoria(
-            titulo
-        )
+        if (categoria == null) {
+            val categoria = Categoria(
+                titulo
+            )
+            insereCategoria(categoria)
+        } else {
+            val categoria = categoria!!
+            categoria.descricao = titulo
 
+            alteraCategoria(categoria)
+        }
+
+    }
+
+    private fun alteraCategoria(categoria: Categoria) {
+        val enderecoCategoria = Uri.withAppendedPath(JogosContentProvider.ENDERECO_CATEGORIAS, categoria.id.toString())
+        val categoriasAlteradas = requireActivity().contentResolver.update(enderecoCategoria, categoria.toContentValues(), null, null)
+
+        if (categoriasAlteradas == 1) {
+            Toast.makeText(requireContext(), R.string.categoria_guardada_com_sucesso, Toast.LENGTH_LONG).show()
+            voltaListaCategorias()
+        } else {
+            binding.editTextTitulo.error = getString(R.string.erro_guardar_categoria)
+        }
+    }
+
+    private fun insereCategoria(categoria: Categoria) {
         val id = requireActivity().contentResolver.insert(
             JogosContentProvider.ENDERECO_CATEGORIAS,
             categoria.toContentValues()
@@ -93,7 +121,11 @@ class NovaCategoriaFragment : Fragment() {
             return
         }
 
-        Toast.makeText(requireContext(), getString(R.string.categoria_guardada_com_sucesso), Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.categoria_guardada_com_sucesso),
+            Toast.LENGTH_SHORT
+        ).show()
         voltaListaCategorias()
     }
 }

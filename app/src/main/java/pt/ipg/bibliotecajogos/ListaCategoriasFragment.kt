@@ -47,7 +47,7 @@ class ListaCategoriasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentListaCategoriasBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -108,7 +108,9 @@ class ListaCategoriasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor
      * @param loader The Loader that is being reset.
      */
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        adapterCategorias!!.cursor = null
+        if (adapterCategorias != null) {
+            adapterCategorias!!.cursor = null
+        }
     }
 
     /**

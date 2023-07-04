@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             is NovoJogoFragment -> (fragment as NovoJogoFragment).processaOpcaoMenu(item)
             is NovaCategoriaFragment -> (fragment as NovaCategoriaFragment).processaOpcaoMenu(item)
             is EliminarJogoFragment -> (fragment as EliminarJogoFragment).processaOpcaoMenu(item)
+            is EliminarCategoriaFragment -> (fragment as EliminarCategoriaFragment).processaOpcaoMenu(item)
             else -> false
         }
 

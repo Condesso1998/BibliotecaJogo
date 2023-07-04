@@ -33,7 +33,9 @@ Rui Condesso
     <string name="eliminar_livro_label">Eliminar jogo</string>
     <string name="hello_blank_fragment">Hello</string>
     <string name="jogo_eliminado_com_sucesso">Jogo eliminado com sucesso</string>
+    <string name="categoria_eliminada_com_sucesso">Ctaegoria eliminada com sucesso</string>
     <string name="erro_eliminar_jogo">Erro ao eliminar jogo</string>
+    <string name="erro_eliminar_categoria">Erro ao eliminar categoria</string>
     <string name="nova_categoria_label">Nova categoria</string>
     <string name="desc">Nome da Categoria</string>
 </resources>

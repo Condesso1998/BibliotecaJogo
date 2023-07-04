@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_listaCategoriasFragment_to_novaCategoriaFragment"
             app:destination="@id/novaCategoriaFragment" />
+        <action
+            android:id="@+id/action_listaCategoriasFragment_to_eliminarCategoriaFragment"
+            app:destination="@id/eliminarCategoriaFragment" />
     </fragment>
     <fragment
         android:id="@+id/novaCategoriaFragment"
@@ -85,6 +88,10 @@
         <action
             android:id="@+id/action_novaCategoriaFragment_to_listaCategoriasFragment"
             app:destination="@id/listaCategoriasFragment" />
+        <argument
+            android:name="categoria"
+            app:argType="pt.ipg.bibliotecajogos.Categoria"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/eliminarCategoriaFragment"

@@ -1,6 +1,7 @@
 package pt.ipg.bibliotecajogos
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import pt.ipg.bibliotecajogos.databinding.FragmentEliminarCategoriaBinding
 
 class EliminarCategoriaFragment : Fragment() {
+    private lateinit var categoria: Categoria
     private var _binding: FragmentEliminarCategoriaBinding? = null
 
     // This property is only valid between onCreateView and
@@ -32,6 +34,10 @@ class EliminarCategoriaFragment : Fragment() {
         val activity = activity as MainActivity
         activity.fragment = this
         activity.idMenuAtual = R.menu.menu_eliminar
+
+        categoria = EliminarCategoriaFragmentArgs.fromBundle(requireArguments()).categoria
+
+        binding.textViewTitulo.text = categoria.descricao
     }
 
     override fun onDestroyView() {

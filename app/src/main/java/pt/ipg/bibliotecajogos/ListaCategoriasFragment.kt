@@ -161,30 +161,31 @@ class ListaCategoriasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor
     fun processaOpcaoMenu(item: MenuItem) : Boolean {
         return when (item.itemId) {
             R.id.action_adicionar -> {
-                adicionaLivro()
+                adicionaCategoria()
                 true
             }
             R.id.action_editar -> {
-                editarLivro()
+                editarCategoria()
                 true
             }
             R.id.action_eliminar -> {
-                eliminarLivro()
+                eliminarCategoria()
                 true
             }
             else -> false
         }
     }
 
-    private fun eliminarLivro() {
+    private fun eliminarCategoria() {
+        val acao = ListaCategoriasFragmentDirections.actionListaCategoriasFragmentToEliminarCategoriaFragment(categoriaSelecionada!!)
+        findNavController().navigate(acao)
+    }
+
+    private fun editarCategoria() {
 
     }
 
-    private fun editarLivro() {
-
-    }
-
-    private fun adicionaLivro() {
+    private fun adicionaCategoria() {
         findNavController().navigate(R.id.action_listaCategoriasFragment_to_novaCategoriaFragment)
     }
 }

@@ -37,5 +37,6 @@ Rui Condesso
     <string name="erro_eliminar_jogo">Erro ao eliminar jogo</string>
     <string name="erro_eliminar_categoria">Erro ao eliminar categoria</string>
     <string name="nova_categoria_label">Nova categoria</string>
+    <string name="editar_jogo_label">Editar Jogo</string>
     <string name="desc">Nome da Categoria</string>
 </resources>

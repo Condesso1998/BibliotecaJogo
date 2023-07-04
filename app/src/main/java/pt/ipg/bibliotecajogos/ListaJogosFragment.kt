@@ -121,6 +121,7 @@ class ListaJogosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun adicionaLivro() {
-        findNavController().navigate(R.id.action_ListaJogosFragment_to_novoJogoFragment)
+        val acao = ListaJogosFragmentDirections.actionListaJogosFragmentToNovoJogoFragment(null)
+        findNavController().navigate(acao)
     }
 }

@@ -2,6 +2,7 @@ package pt.ipg.bibliotecajogos
 
 import android.database.Cursor
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -21,6 +22,7 @@ import java.util.Date
 private const val ID_LOADER_CATEGORIAS = 0
 
 class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
+    private var jogo: Jogo?= null
     private var _binding: FragmentNovoJogoBinding? = null
 
     // This property is only valid between onCreateView and
@@ -46,6 +48,19 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         val activity = activity as MainActivity
         activity.fragment = this
         activity.idMenuAtual = R.menu.menu_guardar_cancelar
+
+        val jogo = NovoJogoFragmentArgs.fromBundle(requireArguments()).jogo
+
+        if (jogo != null) {
+            binding.editTextTitulo.setText(jogo.titulo)
+            if (jogo.dataPublicacao != null) {
+                binding.editTextDataPub.setText(
+                    DateFormat.format("yyyy-MM-dd", jogo.dataPublicacao)
+                )
+            }
+        }
+
+        this.jogo = jogo
     }
 
     override fun onDestroyView() {
@@ -207,5 +222,21 @@ class NovoJogoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
             intArrayOf(android.R.id.text1),
             0
         )
+
+        mostraCategoriaSelecionadaSpinner()
+    }
+
+    private fun mostraCategoriaSelecionadaSpinner() {
+        if (jogo == null) return
+
+        val idCategoria = jogo!!.categoria.id
+
+        val ultimaCategoria = binding.spinnerCategorias.count - 1
+        for (i in 0..ultimaCategoria) {
+            if (idCategoria == binding.spinnerCategorias.getItemIdAtPosition(i)) {
+                binding.spinnerCategorias.setSelection(i)
+                return
+            }
+        }
     }
 }

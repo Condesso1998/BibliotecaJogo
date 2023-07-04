@@ -72,7 +72,11 @@
         android:id="@+id/listaCategoriasFragment"
         android:name="pt.ipg.bibliotecajogos.ListaCategoriasFragment"
         android:label="fragment_lista_categorias"
-        tools:layout="@layout/fragment_lista_categorias" />
+        tools:layout="@layout/fragment_lista_categorias" >
+        <action
+            android:id="@+id/action_listaCategoriasFragment_to_novaCategoriaFragment"
+            app:destination="@id/novaCategoriaFragment" />
+    </fragment>
     <fragment
         android:id="@+id/novaCategoriaFragment"
         android:name="pt.ipg.bibliotecajogos.NovaCategoriaFragment"

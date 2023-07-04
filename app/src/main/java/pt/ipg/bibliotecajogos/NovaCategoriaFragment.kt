@@ -1,6 +1,7 @@
 package pt.ipg.bibliotecajogos
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -14,6 +15,7 @@ import java.util.Calendar
 import java.util.Date
 
 class NovaCategoriaFragment : Fragment() {
+    private var categoria: Categoria?= null
     private var _binding: FragmentNovaCategoriaBinding? = null
 
     // This property is only valid between onCreateView and
@@ -36,6 +38,14 @@ class NovaCategoriaFragment : Fragment() {
         val activity = activity as MainActivity
         activity.fragment = this
         activity.idMenuAtual = R.menu.menu_guardar_cancelar
+
+        val categoria = NovaCategoriaFragmentArgs.fromBundle(requireArguments()).categoria
+
+        if (categoria != null) {
+            binding.editTextTitulo.setText(categoria.descricao)
+        }
+
+        this.categoria = categoria
     }
 
     override fun onDestroyView() {

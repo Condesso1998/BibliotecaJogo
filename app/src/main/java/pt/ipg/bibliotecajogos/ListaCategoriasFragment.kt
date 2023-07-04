@@ -182,10 +182,12 @@ class ListaCategoriasFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor
     }
 
     private fun editarCategoria() {
-
+        val acao = ListaCategoriasFragmentDirections.actionListaCategoriasFragmentToNovaCategoriaFragment(categoriaSelecionada!!)
+        findNavController().navigate(acao)
     }
 
     private fun adicionaCategoria() {
-        findNavController().navigate(R.id.action_listaCategoriasFragment_to_novaCategoriaFragment)
+        val acao = ListaCategoriasFragmentDirections.actionListaCategoriasFragmentToNovaCategoriaFragment(null)
+        findNavController().navigate(acao)
     }
 }
